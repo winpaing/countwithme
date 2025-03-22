@@ -14,6 +14,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileInfo = {
         name: 'Win Paing Soe',
         summary: "System Administrator and Cloud Infrastructure Engineer with 4+ years of experience in Linux systems and cloud environments. Specialized in security, automation, and cloud architecture. Passionate about driving technological excellence and delivering robust IT solutions.",
+        skills: {
+            'Cloud Computing': {
+                icon: 'fa-cloud',
+                items: ['AWS', 'GCP', 'Azure']
+            },
+            'Operating Systems': {
+                icon: 'fa-desktop',
+                items: ['Linux', 'Mac', 'Windows']
+            },
+            'Container Orchestration': {
+                icon: 'fa-cubes', // Updated icon for containers
+                items: ['Docker', 'Podman', 'Kubernetes']
+            },
+            'Infrastructure as Code': {
+                icon: 'fa-code',
+                items: ['Ansible', 'Terraform']
+            },
+            'Databases': {
+                icon: 'fa-database',
+                items: ['Oracle Database', 'MySQL', 'PostgreSQL']
+            },
+            'Programming': {
+                icon: 'fa-terminal',
+                items: ['Python', 'Bash Shell']
+            },
+            'CI/CD Tools': {
+                icon: 'fa-code-branch',
+                items: ['GitHub Actions', 'GitLab', 'Jenkins']
+            }
+        },
         hobbies: [
             { name: 'Coding', icon: 'fa-code' },
             { name: 'Music', icon: 'fa-music' },
@@ -29,13 +59,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Render profile content
     function renderProfile() {
         profileContent.innerHTML = `
             <div class="profile-info">
                 <div class="info-card">
                     <h3 class="info-title">About Me</h3>
                     <p class="profile-summary">${profileInfo.summary}</p>
+                </div>
+                <div class="info-card">
+                    <h3 class="info-title">Skills</h3>
+                    <div class="skills-grid">
+                        ${Object.entries(profileInfo.skills).map(([category, data]) => `
+                            <div class="skill-category">
+                                <h4 class="skill-category-title">
+                                    <i class="fas ${data.icon}"></i> ${category}
+                                </h4>
+                                <div class="skill-items">
+                                    ${data.items.map(item => `
+                                        <span class="skill-item">${item}</span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
                 <div class="info-card">
                     <h3 class="info-title">Hobbies</h3>
