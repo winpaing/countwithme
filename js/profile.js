@@ -13,13 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Profile information
     const profileInfo = {
         name: 'Win Paing Soe',
-        birthDate: 'March 22, 1995',
-        location: 'Myanmar',
-        hobbies: ['Coding', 'Music', 'Photography'],
+        summary: "System Administrator and Cloud Infrastructure Engineer with 4+ years of experience in Linux systems and cloud environments. Specialized in security, automation, and cloud architecture. Passionate about driving technological excellence and delivering robust IT solutions.",
+        hobbies: [
+            { name: 'Coding', icon: 'fa-code' },
+            { name: 'Music', icon: 'fa-music' },
+            { name: 'Gaming', icon: 'fa-gamepad' },
+            { name: 'Reading', icon: 'fa-book' },
+            { name: 'Traveling', icon: 'fa-plane' }
+        ],
         socialLinks: {
-            github: 'https://github.com/winpaingsoe',
-            linkedin: 'https://linkedin.com/in/winpaingsoe',
-            twitter: 'https://twitter.com/winpaingsoe'
+            github: 'https://github.com/winpaing',
+            linkedin: 'https://www.linkedin.com/in/win-paing-soe-b53183100/',
+            facebook: 'https://web.facebook.com/winpaing99',
+            twitter: 'https://x.com/WinPaing99'
         }
     };
 
@@ -29,12 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="profile-info">
                 <div class="info-card">
                     <h3 class="info-title">About Me</h3>
-                    <p>Birthday: ${profileInfo.birthDate}</p>
-                    <p>Location: ${profileInfo.location}</p>
+                    <p class="profile-summary">${profileInfo.summary}</p>
                 </div>
                 <div class="info-card">
                     <h3 class="info-title">Hobbies</h3>
-                    <p>${profileInfo.hobbies.join(', ')}</p>
+                    <p class="hobbies-list">
+                        ${profileInfo.hobbies.map(hobby => 
+                            `<span class="hobby-item"><i class="fas ${hobby.icon}"></i> ${hobby.name}</span>`
+                        ).join(' ')}
+                    </p>
                 </div>
             </div>
             <div class="social-links">
@@ -43,6 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
                 <a href="${profileInfo.socialLinks.linkedin}" target="_blank">
                     <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="${profileInfo.socialLinks.facebook}" target="_blank">
+                    <i class="fab fa-facebook"></i>
                 </a>
                 <a href="${profileInfo.socialLinks.twitter}" target="_blank">
                     <i class="fab fa-twitter"></i>

@@ -81,3 +81,37 @@
         font-size: 1.2rem;
     }
 }
+
+.profile-summary {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+
+.hobbies-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.hobby-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+}
+
+.hobby-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.hobby-item i {
+    color: var(--accent-color);
+}

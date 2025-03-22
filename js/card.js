@@ -12,7 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
         "Your kind words made my special day even better! 💖",
         "I'm touched by your thoughtful message! 🌟",
         "Thanks for being part of my celebration! 🎈",
-        "Your wish means the world to me! ✨"
+        "Your wish means the world to me! ✨",
+        "Your message brought a huge smile to my face! 😊",
+        "So grateful for your sweet birthday wish! 🙏",
+        "Your thoughtfulness made my day extra special! 🌈",
+        "Thank you for making my birthday memorable! 🎊",
+        "Your warm wishes touched my heart! ❤️",
+        "What a lovely message to receive on my birthday! 🌺",
+        "Your words made my celebration even more joyful! 🎵",
+        "Feeling blessed by your kind birthday wish! ✨",
+        "Thank you for sharing in my birthday joy! 🎀",
+        "Your message made my special day shine brighter! ⭐"
     ];
 
     const cardThemes = {
