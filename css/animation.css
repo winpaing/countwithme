@@ -1,0 +1,128 @@
+/* Background Animation Elements */
+.floating-item {
+    position: absolute;
+    pointer-events: none;
+    animation: float 15s linear infinite;
+    opacity: 0.6;
+}
+
+.balloon {
+    width: 40px;
+    height: 50px;
+    background: var(--primary-color);
+    border-radius: 50%;
+}
+
+.star {
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    background: var(--accent-color);
+    width: 30px;
+    height: 30px;
+}
+
+.cake {
+    width: 60px;
+    height: 60px;
+    background: var(--secondary-color);
+    clip-path: polygon(0% 20%, 100% 20%, 100% 100%, 0% 100%);
+}
+
+.firework {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes firework {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(20);
+        opacity: 0;
+    }
+}
+
+/* Birthday Mode Animations */
+.birthday-mode .firework {
+    animation: firework 1s ease-out forwards;
+}
+
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    animation: sparkle 2s linear infinite;
+}
+
+@keyframes sparkle {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1) rotate(180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Diamond Effect */
+.diamond {
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation: diamond 10s linear infinite;
+}
+
+@keyframes diamond {
+    0% {
+        transform: translateY(100vh) translateX(-100vw) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100px) translateX(100vw) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .balloon, .cake {
+        transform: scale(0.7);
+    }
+    
+    .star, .diamond {
+        transform: scale(0.6);
+    }
+}

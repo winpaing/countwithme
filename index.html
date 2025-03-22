@@ -3,98 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Win Paing Soe | Birthday Celebration</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+    <title>Win Paing Soe's Birthday Countdown</title>
     
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/components/profile.css">
-    <link rel="stylesheet" href="css/components/countdown.css">
-    <link rel="stylesheet" href="css/components/gallery.css">
-    <link rel="stylesheet" href="css/components/wishes.css">
-    <link rel="stylesheet" href="css/components/animations.css">
-    <link rel="stylesheet" href="css/components/music-player.css">
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/countdown.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/card.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Background Effects -->
-    <div class="background-effects">
-        <div class="floating-elements"></div>
-        <div class="particles"></div>
-    </div>
-
-    <!-- Music Player -->
-    <div class="music-player">
-        <button class="player-toggle">
-            <span class="material-icons-round">music_note</span>
-        </button>
-        <audio id="birthday-song" loop>
-            <source src="assets/music/birthday-song.mp3" type="audio/mp3">
-        </audio>
+    <!-- Background Animations Container -->
+    <div class="background-animations">
+        <!-- Animation elements will be added dynamically -->
     </div>
 
     <!-- Main Content -->
     <main>
         <!-- Profile Section -->
         <section id="profile" class="section">
-            <div class="container">
-                <div class="profile-card glass-effect">
-                    <!-- Profile content will be dynamically added -->
+            <div class="profile-container">
+                <h1>Win Paing Soe</h1>
+                <p class="birthday-date">March 22, 1995</p>
+                <div class="profile-content">
+                    <!-- Profile content will be added here -->
                 </div>
             </div>
         </section>
 
         <!-- Countdown Section -->
         <section id="countdown" class="section">
-            <div class="container">
-                <div class="countdown-card glass-effect">
-                    <h2>Birthday Countdown</h2>
-                    <div id="countdown-display"></div>
-                    <div id="birthday-message"></div>
+            <div class="countdown-container">
+                <h2 id="countdown-status"></h2>
+                <div id="countdown-timer">
+                    <!-- Countdown timer will be added here -->
                 </div>
             </div>
         </section>
 
         <!-- Gallery Section -->
         <section id="gallery" class="section">
-            <div class="container">
-                <div class="gallery-container glass-effect">
-                    <h2>Memory Gallery</h2>
-                    <div class="gallery-grid"></div>
+            <div class="gallery-container">
+                <!-- Gallery items will be added here -->
+            </div>
+        </section>
+
+        <!-- Birthday Wish Section -->
+        <section id="wish" class="section">
+            <div class="wish-container">
+                <h2>Send Birthday Wishes</h2>
+                <div class="wish-form">
+                    <!-- Wish form will be added here -->
                 </div>
             </div>
         </section>
 
-        <!-- Wishes Section -->
-        <section id="wishes" class="section">
-            <div class="container">
-                <div class="wishes-card glass-effect">
-                    <h2>Send Birthday Wishes</h2>
-                    <form id="wish-form">
-                        <div class="input-group">
-                            <input type="text" id="sender-name" required>
-                            <label for="sender-name">Your Name</label>
-                        </div>
-                        <div class="input-group">
-                            <textarea id="wish-message" required></textarea>
-                            <label for="wish-message">Your Message</label>
-                        </div>
-                        <button type="submit" class="btn-primary">
-                            Send Wish
-                            <span class="material-icons-round">favorite</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
+        <!-- Music Player -->
+        <div id="music-player" class="music-player">
+            <!-- Music player controls will be added here -->
+        </div>
     </main>
 
-    <!-- Scripts -->
-    <script src="js/components/profile.js"></script>
-    <script src="js/components/countdown.js"></script>
-    <script src="js/components/gallery.js"></script>
-    <script src="js/components/wishes.js"></script>
-    <script src="js/components/animations.js"></script>
-    <script src="js/components/music-player.js"></script>
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/animation.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/card.js"></script>
+    <script src="js/player.js"></script>
 </body>
 </html>

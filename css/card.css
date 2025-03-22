@@ -1,0 +1,93 @@
+.card-container {
+    position: relative;
+    perspective: 1000px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+    cursor: pointer;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    padding: 2rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+}
+
+.card-content {
+    text-align: center;
+    color: white;
+}
+
+.thank-you-message {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.wish-form {
+    margin-top: 2rem;
+}
+
+.wish-input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    resize: none;
+}
+
+.wish-button {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    background: var(--accent-color);
+    color: var(--background-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.wish-button:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .card {
+        height: 200px;
+    }
+
+    .thank-you-message {
+        font-size: 1.2rem;
+    }
+
+    .card-front,
+    .card-back {
+        padding: 1.5rem;
+    }
+}
