@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Win Paing Soe's Birthday Celebration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components/layout.css">
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="css/components/profile.css">
+    <link rel="stylesheet" href="css/components/countdown.css">
+    <link rel="stylesheet" href="css/components/gallery.css">
+    <link rel="stylesheet" href="css/components/wishes.css">
+    <link rel="stylesheet" href="css/components/animations.css">
+    <link rel="stylesheet" href="css/components/music-player.css">
+</head>
+<body>
+    <!-- Background Animations -->
+    <div class="background-animations">
+        <div class="floating-elements"></div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <button id="toggle-music" class="music-toggle">🎵</button>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Profile Section -->
+        <section id="profile" class="section">
+            <div class="container">
+                <div class="profile-card">
+                    <h1>Win Paing Soe</h1>
+                    <div class="birthday-info">March 22, 1995</div>
+                    <div class="profile-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Countdown Section -->
+        <section id="countdown" class="section">
+            <div class="container">
+                <div class="countdown-container">
+                    <h2>Time Until The Big Day</h2>
+                    <div id="countdown-timer"></div>
+                    <div id="birthday-message"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section">
+            <div class="container">
+                <h2>Birthday Memories</h2>
+                <div class="gallery-grid"></div>
+            </div>
+        </section>
+
+        <!-- Wishes Section -->
+        <section id="wishes" class="wishes-section">
+            <div class="container">
+                <h2 class="section-title">Send Your Wishes</h2>
+                <div class="wish-form-container glass-card">
+                    <form id="wish-form" class="wish-form">
+                        <div class="input-group">
+                            <input type="text" id="sender-name" placeholder="Your Name" required>
+                        </div>
+                        <div class="input-group">
+                            <textarea id="wish-message" placeholder="Write your birthday wish..." required></textarea>
+                        </div>
+                        <button type="submit" class="wish-button">
+                            <span>Send Wish</span>
+                            <span class="button-icon">🎉</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/components/profile.js"></script>
+    <script src="js/components/countdown.js"></script>
+    <script src="js/components/gallery.js"></script>
+    <script src="js/components/wishes.js"></script>
+    <script src="js/components/animations.js"></script>
+    <script src="js/components/music-player.js"></script>
+</body>
+</html>

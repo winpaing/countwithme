@@ -1,0 +1,45 @@
+/* Spacing System */
+:root {
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 1rem;
+    --space-4: 1.5rem;
+    --space-5: 2rem;
+    --space-6: 3rem;
+    --space-7: 4rem;
+}
+
+/* Margin Utilities */
+.mt-auto { margin-top: auto; }
+.mb-auto { margin-bottom: auto; }
+.ml-auto { margin-left: auto; }
+.mr-auto { margin-right: auto; }
+
+/* Padding Utilities */
+.p-0 { padding: 0; }
+.p-1 { padding: var(--space-1); }
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+.p-5 { padding: var(--space-5); }
+
+/* Responsive Spacing */
+@media (max-width: 768px) {
+    .section {
+        --section-padding: var(--space-6);
+    }
+    
+    .glass-card {
+        --card-padding: var(--space-4);
+    }
+}
+
+@media (max-width: 576px) {
+    .section {
+        --section-padding: var(--space-5);
+    }
+    
+    .glass-card {
+        --card-padding: var(--space-3);
+    }
+}

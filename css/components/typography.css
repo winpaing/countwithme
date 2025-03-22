@@ -1,0 +1,42 @@
+/* Typography Scale */
+:root {
+    --h1-size-desktop: 4rem;
+    --h2-size-desktop: 3rem;
+    --h3-size-desktop: 2rem;
+    --h4-size-desktop: 1.5rem;
+    --body-size-desktop: 1rem;
+    
+    --h1-size-mobile: 2.5rem;
+    --h2-size-mobile: 2rem;
+    --h3-size-mobile: 1.5rem;
+    --h4-size-mobile: 1.25rem;
+    --body-size-mobile: 1rem;
+}
+
+/* Text Styles */
+h1, h2, h3, h4 {
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+h1 { font-size: var(--h1-size-desktop); }
+h2 { font-size: var(--h2-size-desktop); }
+h3 { font-size: var(--h3-size-desktop); }
+h4 { font-size: var(--h4-size-desktop); }
+
+p {
+    font-size: var(--body-size-desktop);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    h1 { font-size: var(--h1-size-mobile); }
+    h2 { font-size: var(--h2-size-mobile); }
+    h3 { font-size: var(--h3-size-mobile); }
+    h4 { font-size: var(--h4-size-mobile); }
+    
+    p { font-size: var(--body-size-mobile); }
+}
