@@ -79,6 +79,28 @@ class Profile {
             });
         }
     }
+
+    addIconInteraction() {
+        const icons = document.querySelectorAll('.info-icon');
+        
+        icons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                this.createRippleEffect(icon);
+            });
+        });
+    }
+
+    createRippleEffect(element) {
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple';
+        
+        const rect = element.getBoundingClientRect();
+        ripple.style.width = ripple.style.height = `${Math.max(rect.width, rect.height)}px`;
+        
+        element.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 600);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
