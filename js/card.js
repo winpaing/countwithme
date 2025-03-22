@@ -1,79 +1,95 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const wishForm = document.querySelector('.wish-form');
+    const wishForm = document.getElementById('wishForm');
+    const thankYouCard = document.getElementById('thank-you-card');
+    
+    if (!wishForm || !thankYouCard) {
+        console.error('Required elements not found');
+        return;
+    }
+
     const thankYouMessages = [
         "Thank you for your wonderful birthday wish! 🎉",
-        "Your kind words made my day special! 💖",
-        "I'm touched by your thoughtful birthday message! 🎈",
-        "Thanks for being part of my birthday celebration! 🎂",
-        "Your wish means a lot to me! ✨"
+        "Your kind words made my special day even better! 💖",
+        "I'm touched by your thoughtful message! 🌟",
+        "Thanks for being part of my celebration! 🎈",
+        "Your wish means the world to me! ✨"
     ];
 
-    function createCard(wishMessage) {
-        const cardContainer = document.createElement('div');
-        cardContainer.className = 'card-container';
+    const cardThemes = {
+        classic: {
+            background: 'linear-gradient(45deg, #f3d6d6, #ffe6e6)',
+            font: 'Serif'
+        },
+        modern: {
+            background: 'linear-gradient(45deg, #2193b0, #6dd5ed)',
+            font: 'Sans-serif'
+        },
+        cute: {
+            background: 'linear-gradient(45deg, #ffafbd, #ffc3a0)',
+            font: 'Comic Sans MS'
+        }
+    };
+
+    wishForm.addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        cardContainer.innerHTML = `
-            <div class="card">
+        const senderName = document.getElementById('sender-name').value.trim();
+        const wishMessage = document.getElementById('wish-message').value.trim();
+        const theme = document.getElementById('card-theme').value;
+        const emoji = document.getElementById('emoji-style').value;
+
+        if (!senderName || !wishMessage) {
+            alert('Please fill in all fields');
+            return;
+        }
+
+        generateThankYouCard(senderName, wishMessage, theme, emoji);
+        wishForm.style.display = 'none';
+        thankYouCard.style.display = 'block';
+    });
+
+    function generateThankYouCard(sender, message, theme, emoji) {
+        const randomThankYou = thankYouMessages[Math.floor(Math.random() * thankYouMessages.length)];
+        const themeStyle = cardThemes[theme];
+
+        thankYouCard.innerHTML = `
+            <div class="card" style="background: ${themeStyle.background}; font-family: ${themeStyle.font}">
                 <div class="card-front">
                     <div class="card-content">
-                        <h3>Thank You!</h3>
-                        <p>${getRandomMessage()}</p>
+                        <h3>${emoji} Thank You ${emoji}</h3>
+                        <p class="thank-you-message">${randomThankYou}</p>
+                        <p class="sender">- From Win Paing Soe</p>
+                        <small>Click to flip</small>
                     </div>
                 </div>
                 <div class="card-back">
                     <div class="card-content">
-                        <p class="wish-message">"${wishMessage}"</p>
-                        <p class="signature">- Win Paing Soe</p>
+                        <p class="wish-message">"${message}"</p>
+                        <p class="sender">- ${sender}</p>
+                        <button class="new-wish-btn" onclick="location.reload()">Send Another Wish</button>
                     </div>
                 </div>
             </div>
         `;
 
-        return cardContainer;
-    }
-
-    function getRandomMessage() {
-        return thankYouMessages[Math.floor(Math.random() * thankYouMessages.length)];
-    }
-
-    if (wishForm) {
-        wishForm.innerHTML = `
-            <textarea class="wish-input" placeholder="Write your birthday wish here..." required></textarea>
-            <button type="submit" class="wish-button">Send Wish</button>
-        `;
-
-        wishForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const wishInput = wishForm.querySelector('.wish-input');
-            const wishMessage = wishInput.value.trim();
-
-            if (wishMessage) {
-                const card = createCard(wishMessage);
-                wishForm.replaceWith(card);
-
-                // Add click event to flip card
-                card.querySelector('.card').addEventListener('click', () => {
-                    card.querySelector('.card').classList.toggle('flipped');
-                });
-
-                // Trigger animations
-                createCelebration();
-            }
+        const card = thankYouCard.querySelector('.card');
+        card.addEventListener('click', () => {
+            card.classList.toggle('flipped');
         });
+
+        createCelebrationEffects();
     }
 
-    function createCelebration() {
-        // Create temporary celebration effects
+    function createCelebrationEffects() {
+        const animationContainer = document.querySelector('.background-animations');
         for (let i = 0; i < 30; i++) {
             const confetti = document.createElement('div');
             confetti.className = 'floating-item star';
             confetti.style.left = `${Math.random() * 100}vw`;
             confetti.style.animationDuration = `${1 + Math.random() * 2}s`;
-            document.querySelector('.background-animations').appendChild(confetti);
+            animationContainer.appendChild(confetti);
 
-            setTimeout(() => {
-                confetti.remove();
-            }, 2000);
+            setTimeout(() => confetti.remove(), 2000);
         }
     }
 });

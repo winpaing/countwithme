@@ -56,9 +56,25 @@
         <section id="wish" class="section">
             <div class="wish-container">
                 <h2>Send Birthday Wishes</h2>
-                <div class="wish-form">
-                    <!-- Wish form will be added here -->
-                </div>
+                <form id="wishForm" class="wish-form">
+                    <input type="text" id="sender-name" placeholder="Your Name" required>
+                    <textarea id="wish-message" placeholder="Write your birthday wish here..." required></textarea>
+                    <div class="wish-options">
+                        <select id="card-theme">
+                            <option value="classic">Classic Theme</option>
+                            <option value="modern">Modern Theme</option>
+                            <option value="cute">Cute Theme</option>
+                        </select>
+                        <select id="emoji-style">
+                            <option value="🎂">🎂 Cake</option>
+                            <option value="🎉">🎉 Party</option>
+                            <option value="🎈">🎈 Balloon</option>
+                            <option value="💝">💝 Heart</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="wish-button">Send Wish</button>
+                </form>
+                <div id="thank-you-card" class="card-container hidden"></div>
             </div>
         </section>
 
