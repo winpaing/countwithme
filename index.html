@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Win Paing Soe's Birthday Celebration</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Base Styles -->
+    <title>Win Paing Soe | Birthday Celebration</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/components/layout.css">
-    <!-- Component Styles -->
     <link rel="stylesheet" href="css/components/profile.css">
     <link rel="stylesheet" href="css/components/countdown.css">
     <link rel="stylesheet" href="css/components/gallery.css">
@@ -17,14 +17,20 @@
     <link rel="stylesheet" href="css/components/music-player.css">
 </head>
 <body>
-    <!-- Background Animations -->
-    <div class="background-animations">
+    <!-- Background Effects -->
+    <div class="background-effects">
         <div class="floating-elements"></div>
+        <div class="particles"></div>
     </div>
 
     <!-- Music Player -->
     <div class="music-player">
-        <button id="toggle-music" class="music-toggle">🎵</button>
+        <button class="player-toggle">
+            <span class="material-icons-round">music_note</span>
+        </button>
+        <audio id="birthday-song" loop>
+            <source src="assets/music/birthday-song.mp3" type="audio/mp3">
+        </audio>
     </div>
 
     <!-- Main Content -->
@@ -32,37 +38,8 @@
         <!-- Profile Section -->
         <section id="profile" class="section">
             <div class="container">
-                <div class="profile-card">
-                    <!-- Remove this line -->
-                    <h1>Win Paing Soe</h1>
-                    
-                    <!-- Keep the rest of the profile section structure -->
-                    <div class="profile-content">
-                        <div class="profile-info">
-                            <div class="info-item">
-                                <div class="info-icon">
-                                    <span class="icon-text">17</span>
-                                </div>
-                                <div class="info-text">March 22, 1995</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-icon">
-                                    <span class="material-icons-round">place</span>
-                                </div>
-                                <div class="info-text">Yangon, Myanmar</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-icon">
-                                    <span class="material-icons-round">star</span>
-                                </div>
-                                <div class="info-text">Aries</div>
-                            </div>
-                            
-                            <p class="profile-bio">
-                                Celebrating three decades of amazing memories and looking forward to new adventures!
-                            </p>
-                        </div>
-                    </div>
+                <div class="profile-card glass-effect">
+                    <!-- Profile content will be dynamically added -->
                 </div>
             </div>
         </section>
@@ -70,9 +47,9 @@
         <!-- Countdown Section -->
         <section id="countdown" class="section">
             <div class="container">
-                <div class="countdown-container">
-                    <h2>Time Until The Big Day</h2>
-                    <div id="countdown-timer"></div>
+                <div class="countdown-card glass-effect">
+                    <h2>Birthday Countdown</h2>
+                    <div id="countdown-display"></div>
                     <div id="birthday-message"></div>
                 </div>
             </div>
@@ -81,26 +58,30 @@
         <!-- Gallery Section -->
         <section id="gallery" class="section">
             <div class="container">
-                <h2>Birthday Memories</h2>
-                <div class="gallery-grid"></div>
+                <div class="gallery-container glass-effect">
+                    <h2>Memory Gallery</h2>
+                    <div class="gallery-grid"></div>
+                </div>
             </div>
         </section>
 
         <!-- Wishes Section -->
-        <section id="wishes" class="wishes-section">
+        <section id="wishes" class="section">
             <div class="container">
-                <h2 class="section-title">Send Your Wishes</h2>
-                <div class="wish-form-container glass-card">
-                    <form id="wish-form" class="wish-form">
+                <div class="wishes-card glass-effect">
+                    <h2>Send Birthday Wishes</h2>
+                    <form id="wish-form">
                         <div class="input-group">
-                            <input type="text" id="sender-name" placeholder="Your Name" required>
+                            <input type="text" id="sender-name" required>
+                            <label for="sender-name">Your Name</label>
                         </div>
                         <div class="input-group">
-                            <textarea id="wish-message" placeholder="Write your birthday wish..." required></textarea>
+                            <textarea id="wish-message" required></textarea>
+                            <label for="wish-message">Your Message</label>
                         </div>
-                        <button type="submit" class="wish-button">
-                            <span>Send Wish</span>
-                            <span class="button-icon">🎉</span>
+                        <button type="submit" class="btn-primary">
+                            Send Wish
+                            <span class="material-icons-round">favorite</span>
                         </button>
                     </form>
                 </div>
@@ -117,38 +98,3 @@
     <script src="js/components/music-player.js"></script>
 </body>
 </html>
-<div class="profile-content">
-    <div class="profile-info">
-        <div class="info-item">
-            <div class="info-icon">
-                <span class="material-icons-round">calendar_today</span>
-            </div>
-        </div>
-        <div class="info-item">
-            <div class="info-icon">
-                <span class="material-icons-round">location_city</span>
-            </div>
-        </div>
-        <div class="info-item">
-            <div class="info-icon">
-                <span class="material-icons-round">auto_awesome</span>
-            </div>
-        </div>
-        
-        <p class="profile-bio">
-            Celebrating three decades of amazing memories and looking forward to new adventures!
-        </p>
-        
-        <div class="social-links">
-            <a href="#" class="social-link">
-                <span class="material-icons-round">public</span>
-            </a>
-            <a href="#" class="social-link">
-                <span class="material-icons-round">camera_alt</span>
-            </a>
-            <a href="#" class="social-link">
-                <span class="material-icons-round">business_center</span>
-            </a>
-        </div>
-    </div>
-</div>

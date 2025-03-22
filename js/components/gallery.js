@@ -1,103 +1,102 @@
 class Gallery {
     constructor() {
+        this.galleryGrid = document.querySelector('.gallery-grid');
         this.images = [
-            { src: 'assets/images/profile.jpg', caption: 'Birthday Boy' },
-            { src: 'assets/images/child.jpg', caption: 'Childhood Memories' },
-            { src: 'assets/images/student_uniform.jpg', caption: 'School Days' },
-            { src: 'assets/images/uni_team.jpg', caption: 'University Team' },
-            { src: 'assets/images/memory1.jpeg', caption: 'Special Moments' },
-            { src: 'assets/images/memory2.jpeg', caption: 'Precious Times' },
-            { src: 'assets/images/flower.jpg', caption: 'Birthday Flowers' },
-            { src: 'assets/images/water.jpg', caption: 'Water Festival' },
-            { src: 'assets/images/view.jpg', caption: 'Scenic Views' },
-            { src: 'assets/images/yangonnight.jpg', caption: 'Yangon Nights' }
+            { 
+                url: './images/child.jpg',
+                caption: 'Childhood Memories',
+                alt: 'Childhood photo memories'
+            },
+            { 
+                url: './images/memory1.jpeg',
+                caption: 'Special Moments',
+                alt: 'Special celebration moments'
+            },
+            { 
+                url: './images/memory2.jpeg',
+                caption: 'Celebrations',
+                alt: 'Birthday celebration'
+            },
+            { 
+                url: './images/student_uniform.jpg',
+                caption: 'Student Life',
+                alt: 'Student life memories'
+            },
+            { 
+                url: './images/uni_team.jpg',
+                caption: 'University Days',
+                alt: 'University team photo'
+            }
         ];
-        this.currentIndex = 0;
         this.init();
     }
 
     init() {
         this.renderGallery();
-        this.createModal();
-        this.addEventListeners();
+        this.preloadImages();
+    }
+
+    preloadImages() {
+        this.images.forEach(image => {
+            const img = new Image();
+            img.src = image.url;
+        });
     }
 
     renderGallery() {
-        const gallery = document.querySelector('.gallery-grid');
-        if (!gallery) return;
-
-        gallery.innerHTML = this.images.map((image, index) => `
-            <div class="gallery-item" data-index="${index}">
-                <img src="${image.src}" alt="${image.caption}" class="gallery-image">
+        this.galleryGrid.innerHTML = this.images.map(image => `
+            <div class="gallery-item">
+                <div class="gallery-image">
+                    <img 
+                        src="${image.url}" 
+                        alt="${image.alt}"
+                        loading="lazy"
+                        onerror="this.src='./images/placeholder.jpg'"
+                    >
+                    <div class="image-overlay"></div>
+                </div>
                 <div class="gallery-caption">
                     <h3>${image.caption}</h3>
                 </div>
             </div>
         `).join('');
+
+        // Add click handlers after rendering
+        this.addClickHandlers();
     }
 
-    createModal() {
-        const modal = document.createElement('div');
-        modal.className = 'gallery-modal';
-        modal.innerHTML = `
-            <span class="modal-close">&times;</span>
-            <div class="modal-content">
-                <img src="" alt="Gallery Image">
-            </div>
-        `;
-        document.body.appendChild(modal);
-        this.modal = modal;
-    }
-
-    addEventListeners() {
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', () => {
-                this.currentIndex = parseInt(item.dataset.index);
-                this.openModal();
+    addClickHandlers() {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const img = item.querySelector('img');
+                this.openLightbox(img.src, img.alt);
             });
         });
+    }
 
-        this.modal.querySelector('.modal-close').addEventListener('click', () => {
-            this.closeModal();
+    openLightbox(src, alt) {
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox';
+        lightbox.innerHTML = `
+            <div class="lightbox-content">
+                <img src="${src}" alt="${alt}">
+                <button class="close-lightbox">&times;</button>
+            </div>
+        `;
+
+        document.body.appendChild(lightbox);
+        
+        // Add close handlers
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.className === 'close-lightbox') {
+                lightbox.remove();
+            }
         });
-
-        document.addEventListener('keydown', (e) => {
-            if (!this.modal.classList.contains('active')) return;
-            
-            if (e.key === 'Escape') this.closeModal();
-            if (e.key === 'ArrowLeft') this.prevImage();
-            if (e.key === 'ArrowRight') this.nextImage();
-        });
-    }
-
-    openModal() {
-        const modalImg = this.modal.querySelector('img');
-        modalImg.src = this.images[this.currentIndex].src;
-        this.modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    closeModal() {
-        this.modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    prevImage() {
-        this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-        this.updateModalImage();
-    }
-
-    nextImage() {
-        this.currentIndex = (this.currentIndex + 1) % this.images.length;
-        this.updateModalImage();
-    }
-
-    updateModalImage() {
-        const modalImg = this.modal.querySelector('img');
-        modalImg.src = this.images[this.currentIndex].src;
     }
 }
 
+// Initialize gallery when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new Gallery();
 });

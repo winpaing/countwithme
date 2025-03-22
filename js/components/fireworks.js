@@ -1,96 +1,54 @@
 class Fireworks {
     constructor() {
-        this.container = null;
-        this.colors = [
-            '#FF1493', '#9370DB', '#FFD700', 
-            '#FF69B4', '#87CEEB', '#FFA500'
-        ];
+        this.canvas = document.createElement('canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
         this.init();
     }
 
     init() {
-        this.createContainer();
-        this.addEventListeners();
-    }
-
-    createContainer() {
-        this.container = document.createElement('div');
-        this.container.className = 'fireworks-container';
-        document.body.appendChild(this.container);
-    }
-
-    addEventListeners() {
-        document.addEventListener('birthdayMode', () => {
-            this.startShow();
-        });
-
-        document.addEventListener('click', (e) => {
-            if (document.body.classList.contains('birthday-mode')) {
-                this.createFirework(e.clientX, e.clientY);
-            }
-        });
-    }
-
-    startShow() {
-        const interval = setInterval(() => {
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * (window.innerHeight / 2);
-            this.createFirework(x, y);
-        }, 1000);
-
-        setTimeout(() => clearInterval(interval), 15000);
+        this.canvas.className = 'fireworks-canvas';
+        document.body.appendChild(this.canvas);
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        this.canvas.addEventListener('click', (e) => this.createFirework(e.clientX, e.clientY));
+        
+        // Auto fireworks on birthday
+        if (this.isBirthday()) {
+            this.startAutoFireworks();
+        }
     }
 
     createFirework(x, y) {
-        const firework = document.createElement('div');
-        firework.className = 'firework';
-        firework.style.left = `${x}px`;
-        firework.style.top = `${y}px`;
-
-        const color = this.colors[Math.floor(Math.random() * this.colors.length)];
-        
-        // Create rocket effect
-        const rocket = document.createElement('div');
-        rocket.className = 'rocket';
-        rocket.style.left = `${x}px`;
-        rocket.style.bottom = '0';
-        rocket.style.setProperty('--travel-height', `-${window.innerHeight - y}px`);
-        this.container.appendChild(rocket);
-
-        // Animate rocket
-        rocket.style.animation = `shoot 1s ease-out forwards`;
-        
-        setTimeout(() => {
-            rocket.remove();
-            this.explode(firework, color);
-        }, 1000);
+        for (let i = 0; i < 50; i++) {
+            const angle = (Math.PI * 2 * i) / 50;
+            const velocity = 5;
+            this.particles.push({
+                x, y,
+                vx: Math.cos(angle) * velocity,
+                vy: Math.sin(angle) * velocity,
+                color: `hsl(${Math.random() * 360}, 50%, 50%)`,
+                life: 100
+            });
+        }
     }
 
-    explode(firework, color) {
-        const particles = 36;
-        const radius = 100;
+    animate() {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        for (let i = 0; i < particles; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'firework-particle';
-            particle.style.background = color;
+        this.particles.forEach((p, i) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.1;
+            p.life--;
 
-            const angle = (i * 360 / particles) * Math.PI / 180;
-            const velocity = 1 + Math.random() * 0.5;
+            if (p.life <= 0) this.particles.splice(i, 1);
 
-            particle.style.left = '0';
-            particle.style.top = '0';
-            particle.style.transform = `rotate(${angle}rad) translate(${radius * velocity}px)`;
-            particle.style.animation = `explode ${1 + Math.random()}s ease-out forwards`;
+            this.ctx.fillStyle = p.color;
+            this.ctx.fillRect(p.x, p.y, 2, 2);
+        });
 
-            firework.appendChild(particle);
-        }
-
-        this.container.appendChild(firework);
-        setTimeout(() => firework.remove(), 2000);
+        requestAnimationFrame(() => this.animate());
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    new Fireworks();
-});

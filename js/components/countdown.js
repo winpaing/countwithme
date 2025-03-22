@@ -1,16 +1,19 @@
 class BirthdayCountdown {
     constructor() {
         this.birthDate = new Date('March 22, 1995');
-        this.nextBirthday = this.calculateNextBirthday();
-        this.messages = {
-            birthday: "🎉 Today is My Birthday! 🎂",
-            birthMonth: "🎈 This is my birthday month! 🎈",
-            countdown: "Time until my next birthday:"
-        };
+        this.nextBirthday = this.getNextBirthday();
+        this.countdownDisplay = document.getElementById('countdown-display');
+        this.messageDisplay = document.getElementById('birthday-message');
         this.init();
     }
 
-    calculateNextBirthday() {
+    init() {
+        this.updateCountdown();
+        setInterval(() => this.updateCountdown(), 1000);
+        this.checkBirthdayMonth();
+    }
+
+    getNextBirthday() {
         const today = new Date();
         let nextBirthday = new Date(today.getFullYear(), 2, 22); // March is 2 (0-based)
         
@@ -21,59 +24,63 @@ class BirthdayCountdown {
         return nextBirthday;
     }
 
-    getTimeRemaining() {
-        const now = new Date();
-        const difference = this.nextBirthday - now;
-
-        return {
-            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-            minutes: Math.floor((difference / (1000 * 60)) % 60),
-            seconds: Math.floor((difference / 1000) % 60)
-        };
-    }
-
     updateCountdown() {
-        const timeLeft = this.getTimeRemaining();
-        const today = new Date();
-        let message = this.messages.countdown;
-
-        // Check if it's birthday
-        if (today.getDate() === 22 && today.getMonth() === 2) {
-            message = this.messages.birthday;
-            this.triggerBirthdayCelebration();
-        }
-        // Check if it's birthday month
-        else if (today.getMonth() === 2) {
-            message = this.messages.birthMonth;
-        }
-
-        document.getElementById('birthday-message').innerHTML = message;
+        const now = new Date();
+        const distance = this.nextBirthday - now;
         
-        // Update time blocks
-        Object.entries(timeLeft).forEach(([unit, value]) => {
-            const element = document.getElementById(unit);
-            if (element) {
-                element.textContent = value.toString().padStart(2, '0');
-            }
-        });
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        this.countdownDisplay.innerHTML = `
+            <div class="countdown-item">
+                <span class="number">${days}</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="countdown-item">
+                <span class="number">${hours}</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="number">${minutes}</span>
+                <span class="label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span class="number">${seconds}</span>
+                <span class="label">Seconds</span>
+            </div>
+        `;
+
+        if (distance < 0) {
+            this.showBirthdayMessage();
+        }
     }
 
-    triggerBirthdayCelebration() {
-        document.body.classList.add('birthday-mode');
-        // Dispatch event for other components
-        document.dispatchEvent(new CustomEvent('birthdayMode'));
+    checkBirthdayMonth() {
+        const today = new Date();
+        if (today.getMonth() === 2) { // March
+            document.body.classList.add('birthday-month');
+            this.messageDisplay.textContent = "🎉 This is my birthday month! 🎉";
+        }
+        
+        if (today.getMonth() === 2 && today.getDate() === 22) {
+            document.body.classList.add('birthday-today');
+            this.showBirthdayMessage();
+        }
     }
 
-    init() {
-        // Initial update
-        this.updateCountdown();
-        // Update every second
-        setInterval(() => this.updateCountdown(), 1000);
+    showBirthdayMessage() {
+        this.countdownDisplay.innerHTML = `
+            <div class="birthday-celebration">
+                <h1>🎉 Today is My Birthday! 🎉</h1>
+                <p>Celebrating ${new Date().getFullYear() - this.birthDate.getFullYear()} years of amazing memories!</p>
+            </div>
+        `;
+        document.dispatchEvent(new Event('birthdayMode'));
     }
 }
 
-// Initialize countdown when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new BirthdayCountdown();
 });

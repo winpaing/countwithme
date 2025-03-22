@@ -1,77 +1,55 @@
 class MusicPlayer {
     constructor() {
-        this.audio = new Audio('assets/music/birthday.mp3');
+        this.audio = new Audio('music/birthday.mp3');
+        this.toggle = document.querySelector('.player-toggle');
         this.isPlaying = false;
-        this.volume = 0.5;
         this.init();
     }
 
     init() {
-        this.createPlayer();
-        this.setupAudio();
+        this.setupAudioSettings();
         this.addEventListeners();
     }
 
-    createPlayer() {
-        const player = document.createElement('div');
-        player.className = 'music-player';
-        player.innerHTML = `
-            <div class="volume-control">
-                <div class="volume-bar"></div>
-            </div>
-            <button class="music-toggle">🎵</button>
-        `;
-        document.body.appendChild(player);
-        
-        this.toggleButton = player.querySelector('.music-toggle');
-        this.volumeControl = player.querySelector('.volume-control');
-        this.volumeBar = player.querySelector('.volume-bar');
-    }
-
-    setupAudio() {
+    setupAudioSettings() {
         this.audio.loop = true;
-        this.audio.volume = this.volume;
-        
-        // Preload audio
-        this.audio.load();
+        this.audio.volume = 0.7;
     }
 
     addEventListeners() {
-        this.toggleButton.addEventListener('click', () => this.togglePlay());
-        
-        this.volumeControl.addEventListener('click', (e) => {
-            const rect = this.volumeControl.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            this.volume = Math.max(0, Math.min(1, x / rect.width));
-            this.updateVolume();
-        });
-
-        // Listen for birthday mode
+        this.toggle.addEventListener('click', () => this.toggleMusic());
         document.addEventListener('birthdayMode', () => {
             if (!this.isPlaying) {
-                this.togglePlay();
+                this.playMusic();
             }
         });
     }
 
-    togglePlay() {
+    toggleMusic() {
         if (this.isPlaying) {
-            this.audio.pause();
-            this.toggleButton.textContent = '🎵';
-            this.toggleButton.classList.remove('playing');
+            this.pauseMusic();
         } else {
-            this.audio.play().catch(error => {
-                console.log('Playback failed:', error);
-            });
-            this.toggleButton.textContent = '⏸';
-            this.toggleButton.classList.add('playing');
+            this.playMusic();
         }
-        this.isPlaying = !this.isPlaying;
     }
 
-    updateVolume() {
-        this.audio.volume = this.volume;
-        this.volumeBar.style.width = `${this.volume * 100}%`;
+    playMusic() {
+        this.audio.play()
+            .then(() => {
+                this.isPlaying = true;
+                this.toggle.classList.add('playing');
+                this.toggle.innerHTML = '<span class="material-icons-round">volume_up</span>';
+            })
+            .catch(error => {
+                console.log('Playback failed:', error);
+            });
+    }
+
+    pauseMusic() {
+        this.audio.pause();
+        this.isPlaying = false;
+        this.toggle.classList.remove('playing');
+        this.toggle.innerHTML = '<span class="material-icons-round">music_note</span>';
     }
 }
 

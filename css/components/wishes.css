@@ -1,149 +1,83 @@
-.wishes-section {
-    padding: 5rem 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--primary-color);
-    font-size: 3rem;
-    font-weight: 700;
-}
-
-.wish-form-container {
+.wishes-card {
+    padding: 3rem;
     max-width: 600px;
     margin: 0 auto;
-    padding: 2.5rem;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.1);
 }
 
-.input-group {
-    margin-bottom: 1.5rem;
-}
-
-.input-group input,
-.input-group textarea {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    border: 2px solid transparent;
-    border-radius: 15px;
-    font-size: 1rem;
-    background: rgba(255, 255, 255, 0.9);
-    transition: all 0.3s ease;
-}
-
-.input-group textarea {
-    height: 150px;
-    resize: none;
-    line-height: 1.6;
-}
-
-.input-group input:focus,
-.input-group textarea:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 20px rgba(255, 105, 180, 0.15);
-}
-
-.wish-button {
-    width: 100%;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 15px;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+#wish-form {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.wish-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(255, 105, 180, 0.2);
-}
-
-.button-icon {
-    font-size: 1.2rem;
-}
-
-/* Floating decorations */
-.wishes-section::before,
-.wishes-section::after {
-    content: '';
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    opacity: 0.1;
-    z-index: -1;
-}
-
-.wishes-section::before {
-    top: -100px;
-    left: -100px;
-}
-
-.wishes-section::after {
-    bottom: -100px;
-    right: -100px;
-}
-
-@media (max-width: 768px) {
-    .wish-form-container {
-        margin: 0 1rem;
-        padding: 1.5rem;
-    }
-
-    .section-title {
-        font-size: 2.5rem;
-    }
-}
-
-.wishes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 2rem 0;
-}
-
-.wish-card {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.wish-card:hover {
-    transform: translateY(-5px);
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .thank-you-card {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.9);
     background: var(--gradient);
-    color: white;
-    padding: 3rem;
+    padding: 2rem;
     border-radius: 20px;
+    color: white;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: all 0.3s ease;
     z-index: 1000;
-    animation: cardPop 0.5s ease;
+    max-width: 90%;
+    width: 400px;
 }
 
-@keyframes cardPop {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+.thank-you-card.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.card-content {
+    position: relative;
+    padding: 2rem;
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.card-decoration {
+    font-size: 3rem;
+    margin: 1rem 0;
+    animation: bounce 1s ease infinite;
+}
+
+.close-card {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+    .wishes-card {
+        padding: 2rem;
+    }
+    
+    .thank-you-card {
+        width: 90%;
+        padding: 1.5rem;
+    }
 }
